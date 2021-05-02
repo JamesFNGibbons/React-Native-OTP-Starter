@@ -1,21 +1,44 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { NativeRouter, Switch, Route } from 'react-router-native';
+
+import { NavigationContainer, StackActions } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+import AuthenticationSplashScreen from './components/authentication/splashScreen';
+import AuthenticationLoginScreen from './components/authentication/loginScreen';
+
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function App() {
+  const Stack = createStackNavigator();
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <NavigationContainer>
+      <Stack.Navigator>
+
+        <Stack.Screen
+          name='Home'
+          component={AuthenticationSplashScreen}
+          options={{
+            headerShown: false
+          }}
+
+         ></Stack.Screen>
+
+        <Stack.Screen
+          name='Login'
+          component={AuthenticationLoginScreen}
+         ></Stack.Screen>
+
+
+
+      </Stack.Navigator>
+    </NavigationContainer>
+  ); 
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+
 });
